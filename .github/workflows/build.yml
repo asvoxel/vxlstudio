@@ -1,0 +1,114 @@
+# VxlStudio CI/CD - Cross-platform build & test
+
+name: Build & Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-macos:
+    runs-on: macos-14   # Apple Silicon (arm64)
+    name: macOS-arm64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install system dependencies
+        run: |
+          brew install cmake ninja opencv spdlog nlohmann-json pybind11 googletest python@3.11
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run C++ tests
+        run: |
+          ctest --test-dir build --output-on-failure -C Release \
+            --exclude-regex "slow|integration"
+
+  build-linux:
+    runs-on: ubuntu-22.04
+    name: Linux-x64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential cmake ninja-build \
+            libopencv-dev libspdlog-dev nlohmann-json3-dev \
+            pybind11-dev libsqlite3-dev \
+            libgtest-dev libgmock-dev \
+            python3-dev python3-pip
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run C++ tests
+        run: |
+          ctest --test-dir build --output-on-failure -C Release \
+            --exclude-regex "slow|integration"
+
+  build-windows:
+    runs-on: windows-latest
+    name: Windows-x64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+
+      # TODO: Open3D is not easily available via vcpkg on Windows.
+      # For now we rely on vcpkg.json manifest to pull opencv4, spdlog,
+      # nlohmann-json, pybind11, gtest. SQLite comes bundled with vcpkg.
+      - name: Configure CMake
+        run: |
+          cmake -B build -G Ninja `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run C++ tests
+        run: |
+          ctest --test-dir build --output-on-failure -C Release `
+            --exclude-regex "slow|integration"

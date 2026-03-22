@@ -1,0 +1,8 @@
+{
+  "name": "pcb_demo",
+  "version": "1.0.0",
+  "description": "PCB solder joint inspection demo (SimCamera)",
+  "author": "VxlStudio Team",
+  "min_vxl_version": "0.1.0",
+  "created": "2026-03-21T00:00:00Z"
+}

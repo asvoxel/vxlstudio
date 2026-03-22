@@ -1,0 +1,238 @@
+/* VxlStudio Demo -- dark theme */
+
+QMainWindow, QWidget {
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+}
+
+QMenuBar {
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+QMenuBar::item:selected {
+    background-color: #505050;
+}
+
+QMenu {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+}
+
+QMenu::item:selected {
+    background-color: #505050;
+}
+
+QToolBar {
+    background-color: #333333;
+    border: none;
+    spacing: 4px;
+    padding: 2px;
+}
+
+QStatusBar {
+    background-color: #333333;
+    color: #cccccc;
+}
+
+QPushButton {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 6px 14px;
+    min-width: 60px;
+}
+
+QPushButton:hover {
+    background-color: #4a4a4a;
+    border-color: #777777;
+}
+
+QPushButton:pressed {
+    background-color: #2a2a2a;
+}
+
+QPushButton:disabled {
+    background-color: #2b2b2b;
+    color: #666666;
+    border-color: #444444;
+}
+
+QGroupBox {
+    border: 1px solid #555555;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding-top: 12px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 2px 8px;
+    color: #aaaaaa;
+}
+
+QTabWidget::pane {
+    border: 1px solid #555555;
+}
+
+QTabBar::tab {
+    background-color: #333333;
+    color: #cccccc;
+    padding: 6px 16px;
+    border: 1px solid #555555;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+QTableWidget, QTableView {
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    gridline-color: #444444;
+    selection-background-color: #3d5a80;
+    border: 1px solid #555555;
+}
+
+QHeaderView::section {
+    background-color: #3a3a3a;
+    color: #cccccc;
+    padding: 4px;
+    border: 1px solid #555555;
+}
+
+QComboBox {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+QComboBox::drop-down {
+    border: none;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    selection-background-color: #505050;
+}
+
+QSpinBox, QDoubleSpinBox {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+QSlider::groove:horizontal {
+    background-color: #555555;
+    height: 6px;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background-color: #3498db;
+    width: 14px;
+    height: 14px;
+    margin: -4px 0;
+    border-radius: 7px;
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: #5dade2;
+}
+
+QPlainTextEdit {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+    selection-background-color: #3d5a80;
+}
+
+QScrollArea {
+    border: none;
+}
+
+QScrollBar:vertical {
+    background-color: #2b2b2b;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #555555;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #777777;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background-color: #2b2b2b;
+    height: 12px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #555555;
+    border-radius: 4px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #777777;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+
+QCheckBox {
+    color: #e0e0e0;
+    spacing: 6px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    background-color: #3a3a3a;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+QDockWidget {
+    titlebar-close-icon: none;
+    color: #cccccc;
+}
+
+QDockWidget::title {
+    background-color: #333333;
+    padding: 4px;
+    text-align: left;
+}
+
+QLabel {
+    color: #e0e0e0;
+}
+
+/* OK / NG indicator styling (applied via setStyleSheet in code) */

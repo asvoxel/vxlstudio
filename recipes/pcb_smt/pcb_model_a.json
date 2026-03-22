@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "type": "pcb_smt",
+  "name": "PCB Model A",
+  "description": "Solder joint height + board flatness inspection (Phase 1)",
+  "created": "2026-03-20T10:00:00Z",
+  "modified": "2026-03-20T10:00:00Z",
+
+  "camera": {
+    "device_id": "SL-001",
+    "calibration_file": "calib_sl001_20260320.json",
+    "exposure_us": 5000,
+    "fringe_count": 12,
+    "hdr_exposures": [2000, 5000, 15000]
+  },
+
+  "reconstruct": {
+    "method": "multi_frequency",
+    "phase_shift_steps": 4,
+    "frequencies": [1, 8, 64],
+    "height_map_resolution_mm": 0.05,
+    "min_modulation": 10.0,
+    "filter": {
+      "type": "median",
+      "kernel_size": 3
+    }
+  },
+
+  "reference": {
+    "height_map_file": "ref_model_a.hmap",
+    "ref_plane_roi": {"x": 100, "y": 100, "w": 800, "h": 600}
+  },
+
+  "inspectors_3d": [
+    {
+      "name": "solder_height",
+      "type": "height_measure",
+      "rois": [
+        {"id": "U1_pin1", "x": 200, "y": 150, "w": 30, "h": 30},
+        {"id": "U1_pin2", "x": 240, "y": 150, "w": 30, "h": 30}
+      ],
+      "params": {
+        "min_height_mm": 0.05,
+        "max_height_mm": 0.35
+      }
+    },
+    {
+      "name": "board_flatness",
+      "type": "flatness",
+      "rois": [
+        {"id": "board_center", "x": 50, "y": 50, "w": 900, "h": 700}
+      ],
+      "params": {
+        "max_flatness_mm": 0.20
+      }
+    },
+    {
+      "name": "bump_detect",
+      "type": "height_threshold",
+      "params": {
+        "max_height_mm": 0.50,
+        "min_defect_area_pixels": 20
+      }
+    }
+  ],
+
+  "inspectors_2d": [],
+
+  "judgement": {
+    "mode": "all_pass",
+    "rules": [
+      {"inspector": "solder_height", "severity": "critical"},
+      {"inspector": "board_flatness", "severity": "warning"},
+      {"inspector": "bump_detect", "severity": "critical"}
+    ]
+  },
+
+  "output": {
+    "save_all_images": false,
+    "save_ng_images": true,
+    "save_height_map": false,
+    "log_level": "INFO"
+  }
+}

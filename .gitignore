@@ -1,41 +1,28 @@
-# Prerequisites
-*.d
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# Compiled Object files
-*.slo
-*.lo
+# Build
+build/
+cmake-build-*/
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
+# OS
+.DS_Store
+Thumbs.db
+3rds/vcpkg/
+studio/src-tauri/target/
+studio/node_modules/
+studio/dist/

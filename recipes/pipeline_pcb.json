@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "camera": "SIM-001",
+  "calibration": "calib.json",
+  "recipe": "pcb_smt/pcb_model_a.json",
+  "steps": [
+    {
+      "type": "capture",
+      "name": "grab"
+    },
+    {
+      "type": "reconstruct",
+      "name": "build_3d",
+      "params": {
+        "method": "structured_light"
+      }
+    },
+    {
+      "type": "inspect_3d",
+      "name": "check_3d"
+    },
+    {
+      "type": "inspect_2d",
+      "name": "check_2d",
+      "params": {
+        "operators": "anomaly_detect"
+      }
+    },
+    {
+      "type": "output",
+      "name": "result",
+      "params": {
+        "save_ng": "true"
+      }
+    }
+  ]
+}
