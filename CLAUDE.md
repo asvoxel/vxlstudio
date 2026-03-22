@@ -67,6 +67,9 @@ libvxl_core
 - `models/` — AI 模型
 - `recipes/` — 行业检测模板
 - `tools/` — 辅助工具
+- `scripts/` — 发布脚本
+  - [`publish_opensource.sh`](scripts/publish_opensource.sh) — 同步公开源码到 GitHub（排除 studio/models）
+  - [`clean_pub_repo.sh`](scripts/clean_pub_repo.sh) — 清理公开仓库中残留的私有文件
 - `docs/design/` — 设计文档
 
 ## 技术栈
