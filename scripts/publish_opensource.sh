@@ -45,9 +45,10 @@ fi
 
 # ─── 读取版本 ─────────────────────────────────────────────────────────────────
 
-# 从 CMakeLists.txt 提取版本
-VERSION=$(grep -m1 'project(VxlStudio VERSION' "${PROJECT_DIR}/CMakeLists.txt" \
-    | sed 's/.*VERSION \([0-9.]*\).*/\1/' 2>/dev/null)
+# 从 CMakeLists.txt 提取版本（支持多行 project() 声明）
+VERSION=$(grep -A5 'project(' "${PROJECT_DIR}/CMakeLists.txt" \
+    | grep 'VERSION' | head -1 \
+    | sed 's/.*VERSION[[:space:]]*\([0-9.]*\).*/\1/' 2>/dev/null)
 if [ -z "${VERSION}" ]; then
     VERSION="0.0.0"
     warn "Cannot extract version from CMakeLists.txt, using ${VERSION}"
