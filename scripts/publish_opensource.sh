@@ -68,7 +68,7 @@ echo ""
 
 # ─── 排除列表 ─────────────────────────────────────────────────────────────────
 
-# 私有内容：studio 源码、AI 模型、构建产物、git 元数据
+# 私有内容 + 大型第三方 + 构建产物
 EXCLUDE=(
     --exclude='.git'
     --exclude='.git/'
@@ -82,6 +82,9 @@ EXCLUDE=(
     --exclude='node_modules/'
     --exclude='dist/'
     --exclude='*.egg-info/'
+    --exclude='3rds/vcpkg/'
+    --exclude='3rds/*.tar.gz'
+    --exclude='3rds/*.zip'
 )
 
 # ─── 同步文件 ─────────────────────────────────────────────────────────────────
